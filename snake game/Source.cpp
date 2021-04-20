@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <conio.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -56,7 +57,7 @@ void Draw()
 			}
 			else if (i == fruitY && j == fruitX)
 			{
-				cout << "O";
+				cout << "f";
 			}
 			else
 			{
@@ -66,7 +67,7 @@ void Draw()
 					if (tailX[k] == j && tailY[k] == i)
 					{
 						print = true;
-						cout << "f";
+						cout << "o";
 					}
 				}
 				if (!print)
@@ -196,6 +197,8 @@ int main()
 
 	while (!gameOver)
 	{
+		Sleep(100);
+
 		Draw();
 		Input();
 		Logic();
