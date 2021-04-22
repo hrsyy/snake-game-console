@@ -115,7 +115,7 @@ void Input()
 }
 
 
-void Logic()
+void Logic(int &impassableWalls)
 {
 	int prevX = tailX[0];
 	int prevY = tailY[0];
@@ -149,9 +149,12 @@ void Logic()
 		break;
 	}
 
-	if (x > width || x < 0 || y > height || y < 0)
+	if (impassableWalls == 2)
 	{
-		gameOver = true;
+		if (x > width - 2 || x < 0 || y > height - 1 || y < 0)
+		{
+			gameOver = true;
+		}
 	}
 
 	if (x >= width -1)
@@ -180,7 +183,6 @@ void Logic()
 		}
 	}
 
-
 	if (x == fruitX && fruitY == y)
 	{
 		score++;
@@ -192,16 +194,16 @@ void Logic()
 }
 
 
-int diff(int &mode)
+int diff(int &difficulty)
 {
-	switch (mode)
+	switch (difficulty)
 	{
 	case 1:
-		return mode = 200;
+		return difficulty = 200;
 	case 2:
-		return mode = 100;
+		return difficulty = 100;
 	case 3:
-		return mode = 50;
+		return difficulty = 50;
 	}
 }
 
@@ -210,21 +212,25 @@ int main()
 {
 	setlocale(LC_ALL, "ru");
 
-	int mode;
+
+	int impassableWalls;
+	int difficulty;
+
+	cout << "Выберете режим игры:\n1.Стандартный\n2.Непроходимые стены\n";
+	cin >> impassableWalls;
+
 	cout << "Выберете уровень сложности:\n1.Легкий\n2.Средний\n3.Сложный\n";
-	cin >> mode;
+	cin >> difficulty;
 
-	mode = diff(mode);
-
+	difficulty = diff(difficulty);
 
 	Setup();
 	while (!gameOver)
 	{
 		Draw();
 		Input();
-		Logic();
-		/*dif(x);*/
-		Sleep(mode);
+		Logic(impassableWalls);
+		Sleep(difficulty);
 	}
 
 	return 0;
