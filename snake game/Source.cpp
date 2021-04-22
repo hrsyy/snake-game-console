@@ -6,7 +6,7 @@ using namespace std;
 
 bool gameOver;
 const int width = 20;
-const int height = 20;
+const int height = width;
 int tailX[100], tailY[100];
 int nTail;
 int x, y, fruitX, fruitY, score;
@@ -38,7 +38,7 @@ void Draw()
 	system("cls");
 	for (int i = 0; i < width + 1; i++)
 	{
-		cout << "#";
+		cout << "/";
 	}
 	cout << endl;
 
@@ -49,7 +49,7 @@ void Draw()
 		{
 			if (j == 0 || j == width - 1)
 			{
-				cout << "#";
+				cout << "/";
 			}
 			if (i == y && j == x)
 			{
@@ -81,7 +81,7 @@ void Draw()
 
 	for (int i = 0; i < width + 1; i++)
 	{
-		cout << "#";
+		cout << "/";
 	}
 	cout << endl;
 
@@ -149,10 +149,10 @@ void Logic()
 		break;
 	}
 
-	//if (x > width || x < 0 || y > height || y < 0)
-	//{
-	//	gameOver = true;
-	//}
+	if (x > width || x < 0 || y > height || y < 0)
+	{
+		gameOver = true;
+	}
 
 	if (x >= width -1)
 	{
@@ -180,6 +180,7 @@ void Logic()
 		}
 	}
 
+
 	if (x == fruitX && fruitY == y)
 	{
 		score++;
@@ -191,17 +192,39 @@ void Logic()
 }
 
 
+int diff(int &mode)
+{
+	switch (mode)
+	{
+	case 1:
+		return mode = 200;
+	case 2:
+		return mode = 100;
+	case 3:
+		return mode = 50;
+	}
+}
+
+
 int main()
 {
-	Setup();
+	setlocale(LC_ALL, "ru");
 
+	int mode;
+	cout << "Выберете уровень сложности:\n1.Легкий\n2.Средний\n3.Сложный\n";
+	cin >> mode;
+
+	mode = diff(mode);
+
+
+	Setup();
 	while (!gameOver)
 	{
-		Sleep(100);
-
 		Draw();
 		Input();
 		Logic();
+		/*dif(x);*/
+		Sleep(mode);
 	}
 
 	return 0;

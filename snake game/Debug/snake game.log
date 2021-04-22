@@ -1,2 +1,3 @@
 ﻿  Source.cpp
+D:\WorkFlow\snake game\snake game\Source.cpp(206): warning C4715: diff: значение возвращается не при всех путях выполнения
   snake game.vcxproj -> D:\WorkFlow\snake game\Debug\snake game.exe
